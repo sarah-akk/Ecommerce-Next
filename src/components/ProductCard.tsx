@@ -1,0 +1,113 @@
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Image,
+  Chip,
+  Button,
+  addToast,
+} from "@heroui/react";
+import { Star, ShoppingCart } from "lucide-react";
+import { useCart } from "@/hooks/useCart";
+import { formatPrice, getStockStatus } from "@/lib/utils";
+import type { ProductCardProps } from "@/types/types";
+
+export function ProductCard({ product, onPress }: ProductCardProps) {
+  const stockStatus = getStockStatus(product.stock);
+  const discountedPrice =
+    product.price * (1 - product.discountPercentage / 100);
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      title: product.title,
+      thumbnail: product.thumbnail,
+      price: product.price,
+    });
+    addToast({
+      title: "Add to card !",
+      description: "Add to card successfully",
+      color: "default",
+    });
+  };
+
+  return (
+    <Card
+      shadow="sm"
+      isPressable
+      onPress={onPress}
+      className="group min-h-[420px] w-full transition-shadow hover:shadow-lg"
+    >
+      <CardBody className="relative flex-shrink-0 overflow-hidden p-0">
+        <div className="relative">
+          <Image
+            alt={product.title}
+            className="aspect-square w-full object-cover transition-transform group-hover:scale-105"
+            src={product.thumbnail}
+            width="100%"
+            radius="none"
+          />
+          {product.discountPercentage > 0 && (
+            <Chip
+              size="sm"
+              color="danger"
+              variant="solid"
+              className="absolute left-2 top-2 z-10 font-semibold"
+            >
+              -{Math.round(product.discountPercentage)}%
+            </Chip>
+          )}
+          <Chip
+            size="sm"
+            color={stockStatus.color}
+            variant="flat"
+            className="absolute right-2 top-2 z-10"
+          >
+            {stockStatus.label}
+          </Chip>
+        </div>
+      </CardBody>
+      <CardFooter className="flex flex-col items-start gap-2 p-4">
+        <Chip size="sm" variant="flat" color="default" className="capitalize">
+          {product.category}
+        </Chip>
+        <h3 className="line-clamp-1 text-sm font-semibold text-foreground">
+          {product.title}
+        </h3>
+        <div className="flex w-full items-center justify-between">
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-lg font-bold text-primary">
+              {formatPrice(discountedPrice)}
+            </span>
+            {product.discountPercentage > 0 && (
+              <span className="text-xs text-muted-foreground line-through">
+                {formatPrice(product.price)}
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-1">
+            <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
+            <span className="text-xs font-medium text-muted-foreground">
+              {product.rating.toFixed(1)}
+            </span>
+          </div>
+        </div>
+        <Button
+          as="div"
+          role="button"
+          tabIndex={0}
+          size="sm"
+          color="primary"
+          variant="flat"
+          className="mt-1 w-full"
+          startContent={<ShoppingCart className="h-3.5 w-3.5" />}
+          onPress={handleAddToCart}
+          isDisabled={product.stock === 0}
+        >
+          Add to Cart
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
