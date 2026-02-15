@@ -3,7 +3,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HeroUIProvider } from "@heroui/react";
 import { ToastProvider } from "@heroui/toast";
-import { CartProvider } from "@/hooks/useCart";
 import { ReactNode, useState } from "react";
 import { ThemeProvider } from "./Themeprovider";
 
@@ -21,7 +20,7 @@ export default function Providers({ children }: { children: ReactNode }) {
       >
         <HeroUIProvider>
           <ToastProvider />
-          <CartProvider>{children}</CartProvider>
+          {children}
         </HeroUIProvider>
       </ThemeProvider>
     </QueryClientProvider>

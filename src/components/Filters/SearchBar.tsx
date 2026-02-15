@@ -34,7 +34,7 @@ export function SearchBar({ onSearch, resultCount }: SearchBarProps) {
         }
         classNames={{
           inputWrapper: `
-            bg-card shadow-sm
+            shadow-sm
             focus-within:ring-0
             focus-within:ring-offset-0
             focus-within:border-transparent

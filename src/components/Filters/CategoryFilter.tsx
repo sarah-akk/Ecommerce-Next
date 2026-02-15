@@ -16,7 +16,7 @@ export function CategoryFilter({ selected, onSelect }: CategoryFilterProps) {
         onSelect(val ?? "");
       }}
       classNames={{
-        trigger: "bg-card shadow-sm",
+        trigger: "shadow-sm",
       }}
       aria-label="Filter by category"
     >

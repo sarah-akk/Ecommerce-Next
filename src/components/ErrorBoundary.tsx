@@ -27,7 +27,7 @@ export class ErrorBoundary extends Component<
             {this.state.error?.message || "An unexpected error occurred."}
           </p>
           <Button
-            color="primary"
+            color="secondary"
             onPress={() => this.setState({ hasError: false, error: undefined })}
           >
             Try Again

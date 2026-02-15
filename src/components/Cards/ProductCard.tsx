@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardBody,
@@ -6,35 +7,44 @@ import {
   Chip,
   Button,
   addToast,
+  PressEvent,
 } from "@heroui/react";
-import { Star, ShoppingCart } from "lucide-react";
+import { Star, ShoppingCart, Check } from "lucide-react";
+import { useState } from "react";
 import { useCart } from "@/hooks/useCart";
 import { formatPrice, getStockStatus } from "@/lib/utils";
 import type { ProductCardProps } from "@/types/types";
+import { AddToCartButton } from "../Buttons/AddToCartButton";
 
 export function ProductCard({ product, onPress }: ProductCardProps) {
   const stockStatus = getStockStatus(product.stock);
   const discountedPrice =
     product.price * (1 - product.discountPercentage / 100);
-  const { addToCart } = useCart();
+  const { addToCart, items } = useCart();
+  const [isAdding, setIsAdding] = useState(false);
+
+  const isInCart = items.some((item) => item.id === product.id);
 
   const handleAddToCart = () => {
+    setIsAdding(true);
     addToCart({
       id: product.id,
       title: product.title,
       thumbnail: product.thumbnail,
-      price: product.price,
+      price: discountedPrice,
     });
+
     addToast({
-      title: "Add to card !",
-      description: "Add to card successfully",
-      color: "default",
+      title: "Added to cart!",
+      description: `${product.title} has been added to your cart`,
+      color: "success",
     });
+    setTimeout(() => setIsAdding(false), 1000);
   };
 
   return (
     <Card
-      shadow="sm"
+      shadow="md"
       isPressable
       onPress={onPress}
       className="group min-h-[420px] w-full transition-shadow hover:shadow-lg"
@@ -77,7 +87,7 @@ export function ProductCard({ product, onPress }: ProductCardProps) {
         </h3>
         <div className="flex w-full items-center justify-between">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-lg font-bold text-primary">
+            <span className="text-lg font-bold text-secondary">
               {formatPrice(discountedPrice)}
             </span>
             {product.discountPercentage > 0 && (
@@ -93,20 +103,12 @@ export function ProductCard({ product, onPress }: ProductCardProps) {
             </span>
           </div>
         </div>
-        <Button
-          as="div"
-          role="button"
-          tabIndex={0}
-          size="sm"
-          color="primary"
-          variant="flat"
-          className="mt-1 w-full"
-          startContent={<ShoppingCart className="h-3.5 w-3.5" />}
-          onPress={handleAddToCart}
-          isDisabled={product.stock === 0}
-        >
-          Add to Cart
-        </Button>
+        <AddToCartButton
+          isInCart={isInCart}
+          isAdding={isAdding}
+          onAddToCart={handleAddToCart}
+          isDisabled={!product || product.stock === 0}
+        />
       </CardFooter>
     </Card>
   );

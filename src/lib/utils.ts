@@ -1,3 +1,5 @@
+import { Product } from "@/types/types";
+
 export function parseSortKey(key: string) {
   if (key === "default") return { sortBy: undefined, order: undefined };
   const [sortBy, order] = key.split("-");
@@ -25,3 +27,16 @@ export const SORT_OPTIONS = [
   { key: "title-desc", label: "Title: Z–A" },
   { key: "rating-desc", label: "Rating: Highest" },
 ];
+
+
+export function formatDiscountedPrice(product: Product): number {
+  const { price, discountPercentage } = product;
+
+  if (!discountPercentage || discountPercentage <= 0) {
+    return price;
+  }
+
+  const discounted = price * (1 - discountPercentage / 100);
+
+  return Math.round(discounted * 100) / 100;
+}

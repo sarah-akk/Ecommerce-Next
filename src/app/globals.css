@@ -3,4 +3,36 @@
  @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
  @custom-variant dark (&:is(.dark *));
 
-
+ @layer base {
+   :root {
+     --foreground: 240 10% 3.9%;
+     --muted-foreground: 240 3.8% 46.1%;
+     --background: 0 0% 100%;
+   }
+ 
+   .dark {
+     --foreground: 0 0% 98%;
+     --muted-foreground: 240 5% 64.9%;
+     --background: 240 10% 3.9%;
+   }
+ }
+ 
+ @layer base {
+   body {
+     @apply bg-background text-foreground;
+   }
+ }
+ 
+ @layer utilities {
+   .text-foreground {
+     color: hsl(var(--foreground));
+   }
+   
+   .text-muted-foreground {
+     color: hsl(var(--muted-foreground));
+   }
+   
+   .bg-background {
+     background-color: hsl(var(--background));
+   }
+ }

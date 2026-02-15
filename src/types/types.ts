@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-// API / Domain
+
 export interface Review {
   rating: number;
   comment: string;
@@ -60,7 +60,6 @@ export interface Category {
   url: string;
 }
 
-// Cart
 export interface CartItem {
   id: number;
   title: string;
@@ -74,7 +73,6 @@ export interface CartContextValue {
   addToCart: (item: CartItem) => void;
 }
 
-// Component props
 export interface ErrorBoundaryProps {
   children: ReactNode;
 }
@@ -102,6 +100,9 @@ export interface ProductCardProps {
 export interface ProductDetailModalProps {
   productId: number | null;
   onClose: () => void;
+  onNavigate?: (direction: "next" | "previous") => void;
+  hasNext?: boolean;
+  hasPrevious?: boolean;
 }
 
 export interface SortSelectProps {
@@ -120,4 +121,38 @@ export interface UseProductsParams {
   order?: "asc" | "desc";
   skip?: number;
   limit?: number;
+}
+
+
+export type ProductReviewsProps = {
+  reviews: Review[];
+  maxReviews?: number;
+};
+
+export type ProductImageGalleryProps = {
+  productId: number | string;
+  title: string;
+  images: string[];
+  thumbnail?: string;
+};
+
+export type AddToCartButtonProps = {
+  isInCart: boolean;
+  isAdding: boolean;
+  onAddToCart: () => void;
+  isDisabled?: boolean;
+};
+
+export type UseProductModalKeyboardProps = {
+  enabled: boolean;
+  onClose: () => void;
+  onNext?: () => void;
+  onPrev?: () => void;
+  onAddToCart?: () => void;
+  canAddToCart?: boolean;
+};
+
+export interface LogoProps {
+  size?: number; 
+  onClick?: () => void;
 }

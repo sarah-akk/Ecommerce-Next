@@ -1,9 +1,9 @@
 import type { ComponentProps, ReactNode } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { ProductCard } from "@/components/ProductCard";
 import { useCart } from "@/hooks/useCart";
 import { addToast } from "@heroui/react";
+import { ProductCard } from "@/components/Cards/ProductCard";
 
 /* =======================
    MOCKS

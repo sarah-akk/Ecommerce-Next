@@ -12,7 +12,7 @@ export function SortSelect({ selected, onSelect }: SortSelectProps) {
         onSelect(val ?? "default");
       }}
       classNames={{
-        trigger: "bg-card shadow-sm",
+        trigger: "shadow-sm",
       }}
       aria-label="Sort products"
     >

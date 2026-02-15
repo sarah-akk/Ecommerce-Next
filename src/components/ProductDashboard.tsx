@@ -3,17 +3,19 @@ import { useState } from "react";
 import { Pagination, Skeleton } from "@heroui/react";
 import { PackageOpen } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ProductCard } from "./ProductCard";
-import { SearchBar } from "./SearchBar";
-import { CategoryFilter } from "./CategoryFilter";
-import { SortSelect } from "./SortSelect";
-import { ThemeToggle } from "./ThemeToggle";
-import { ProductDetailModal } from "./ProductDetailModal";
-import { parseSortKey } from "@/lib/utils";
-import CartButton from "./CartButton";
-import { containerVariants, itemVariants } from "@/lib/variants";
-import { useProductFilters } from "@/hooks/useProductFilters";
 import { useProducts } from "@/hooks/useProducts";
+import { useProductFilters } from "@/hooks/useProductFilters";
+import { parseSortKey } from "@/lib/utils";
+import { containerVariants, itemVariants } from "@/lib/variants";
+import { CartButton } from "./Buttons/CartButton";
+import { ThemeToggle } from "./Buttons/ThemeToggle";
+import { SearchBar } from "./Filters/SearchBar";
+import { CategoryFilter } from "./Filters/CategoryFilter";
+import { SortSelect } from "./Filters/SortSelect";
+import { ProductCard } from "./Cards/ProductCard";
+import { ProductDetailModal } from "./Modals/ProductDetailModal";
+import { useProductNavigation } from "@/hooks/useProductNavigation";
+import { Logo } from "./UI/Logo";
 
 const LIMIT = 12;
 
@@ -21,6 +23,7 @@ export function ProductDashboard() {
   const [selectedProductId, setSelectedProductId] = useState<number | null>(
     null,
   );
+
   const {
     search,
     category,
@@ -46,6 +49,15 @@ export function ProductDashboard() {
 
   const totalPages = data ? Math.ceil(data.total / LIMIT) : 1;
 
+  const currentProducts = data?.products || [];
+
+  const { selectedIndex, hasNext, hasPrevious, handleNavigate } =
+    useProductNavigation(
+      currentProducts,
+      selectedProductId,
+      setSelectedProductId,
+    );
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 ltr">
       {/* Header */}
@@ -55,13 +67,18 @@ export function ProductDashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">
-            Product Dashboard
-          </h1>
-          <p className="mt-1 text-muted-foreground">
-            Browse, search, and filter through our catalog
-          </p>
+        <div className="flex max-md:flex-col gap-10">
+          <div>
+            <Logo onClick={() => (window.location.href = "/")} />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">
+              Products Shop
+            </h1>
+            <p className="mt-1 text-muted-foreground">
+              Browse, search, and filter through our catalog
+            </p>
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <CartButton />
@@ -186,15 +203,18 @@ export function ProductDashboard() {
             page={page}
             onChange={setPage}
             showControls
-            color="primary"
+            color="secondary"
           />
         </motion.div>
       )}
 
-      {/* Detail Modal */}
+      {/* Detail Modal with Product Navigation */}
       <ProductDetailModal
         productId={selectedProductId}
         onClose={() => setSelectedProductId(null)}
+        onNavigate={handleNavigate}
+        hasNext={hasNext}
+        hasPrevious={hasPrevious}
       />
     </div>
   );
