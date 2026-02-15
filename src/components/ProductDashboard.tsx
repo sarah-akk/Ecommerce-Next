@@ -61,7 +61,7 @@ export function ProductDashboard() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 ltr">
       {/* Header */}
-      <motion.div
+      <motion.header
         className="mb-8 flex items-start justify-between"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -84,10 +84,10 @@ export function ProductDashboard() {
           <CartButton />
           <ThemeToggle />
         </div>
-      </motion.div>
+      </motion.header>
 
       {/* Controls */}
-      <motion.div
+      <motion.section
         className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ export function ProductDashboard() {
         </div>
         <CategoryFilter selected={category} onSelect={setCategory} />
         <SortSelect selected={sortKey} onSelect={setSortKey} />
-      </motion.div>
+      </motion.section>
 
       {/* Active filters summary */}
       <AnimatePresence>
@@ -156,7 +156,7 @@ export function ProductDashboard() {
 
       {/* Products */}
       {!isLoading && data && data.products.length > 0 && (
-        <motion.div
+        <motion.section
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           variants={containerVariants}
           initial="hidden"
@@ -171,7 +171,7 @@ export function ProductDashboard() {
               />
             </motion.div>
           ))}
-        </motion.div>
+        </motion.section>
       )}
 
       {/* Empty */}

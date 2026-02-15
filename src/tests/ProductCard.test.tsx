@@ -94,7 +94,7 @@ describe("ProductCard", () => {
       id: 1,
       title: "Test Product",
       thumbnail: "img.jpg",
-      price: 100,
+      price: 90,
     });
 
     expect(addToast).toHaveBeenCalled();
