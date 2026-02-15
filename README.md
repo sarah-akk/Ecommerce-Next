@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🛒 E-Commerce Product Dashboard – Next.js
 
-## Getting Started
+A modern e-commerce product dashboard built with Next.js and TypeScript, focused on performance, scalability, and clean UI architecture.
 
-First, run the development server:
+✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Product listing with pagination and filtering
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Shopping cart with persistent state management
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Smooth animations and responsive design
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Optimized data fetching with caching and background updates
 
-## Learn More
+🧰 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+Next.js (App Router)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+React & TypeScript
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+HeroUI + Tailwind CSS
 
-## Deploy on Vercel
+Zustand for cart state management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+TanStack React Query for server-state management
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Framer Motion for animations
+
+Jest & React Testing Library for testing
+
+
+
+Clean, maintainable component architecture
+
+Thoughtful library selection and testing strategy
