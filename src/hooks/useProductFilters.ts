@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { paramsToFilters, updateURL, type ProductFilters } from "@/lib/url-params";
-
+import { useRef } from "react";
 
 export function useProductFilters() {
   const searchParams = useSearchParams();
-  
+  const isInitialMount = useRef(false);
+
   const [filters, setFilters] = useState<ProductFilters>(() => {
     return paramsToFilters(searchParams);
   });
@@ -19,14 +20,21 @@ export function useProductFilters() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
+const updateFilters = useCallback((updates: Partial<ProductFilters>) => {
+  setFilters((prev) => {
+    const newFilters = { ...prev, ...updates };
 
-  const updateFilters = useCallback((updates: Partial<ProductFilters>) => {
-    setFilters((prev) => {
-      const newFilters = { ...prev, ...updates };
+    if (isInitialMount.current) {
       updateURL(newFilters);
-      return newFilters;
-    });
-  }, []);
+    }
+
+    return newFilters;
+  });
+}, []);
+
+useEffect(() => {
+  isInitialMount.current = true;
+}, []);
 
   const setSearch = useCallback(
     (search: string) => {
