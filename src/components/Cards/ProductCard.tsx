@@ -12,14 +12,17 @@ import {
 import { Star, ShoppingCart, Check } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/hooks/useCart";
-import { formatPrice, getStockStatus } from "@/lib/utils";
+import {
+  formatDiscountedPrice,
+  formatPrice,
+  getStockStatus,
+} from "@/lib/utils";
 import type { ProductCardProps } from "@/types/types";
 import { AddToCartButton } from "../Buttons/AddToCartButton";
 
 export function ProductCard({ product, onPress }: ProductCardProps) {
   const stockStatus = getStockStatus(product.stock);
-  const discountedPrice =
-    product.price * (1 - product.discountPercentage / 100);
+  const discountedPrice = product ? formatDiscountedPrice(product) : 0;
   const { addToCart, items } = useCart();
   const [isAdding, setIsAdding] = useState(false);
 
@@ -58,7 +61,7 @@ export function ProductCard({ product, onPress }: ProductCardProps) {
             width="100%"
             radius="none"
           />
-          {product.discountPercentage > 0 && (
+          {product.discountPercentage >= 1 && (
             <Chip
               size="sm"
               color="danger"
@@ -90,7 +93,7 @@ export function ProductCard({ product, onPress }: ProductCardProps) {
             <span className="text-lg font-bold text-secondary">
               {formatPrice(discountedPrice)}
             </span>
-            {product.discountPercentage > 0 && (
+            {product.discountPercentage >= 1 && (
               <span className="text-xs text-muted-foreground line-through">
                 {formatPrice(product.price)}
               </span>

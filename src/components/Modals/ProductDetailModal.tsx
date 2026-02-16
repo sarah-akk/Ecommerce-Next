@@ -181,7 +181,7 @@ export function ProductDetailModal({
                       <span className="text-2xl font-bold text-secondary">
                         {formatPrice(discountedPrice)}
                       </span>
-                      {product.discountPercentage > 5 && (
+                      {product.discountPercentage >= 1 && (
                         <>
                           <span className="text-sm text-muted-foreground line-through">
                             {formatPrice(product.price)}
