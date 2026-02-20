@@ -1,10 +1,11 @@
 "use client";
 
 import { Logo } from "@/components/UI/Logo";
+import { LINKS } from "@/lib/utils";
+import { FootercontainerVariants, FooteritemVariants } from "@/lib/variants";
 import { Divider, Link, Chip } from "@heroui/react";
 import { motion } from "framer-motion";
 import {
-  ShoppingBag,
   Github,
   Twitter,
   Instagram,
@@ -15,30 +16,6 @@ import {
   ArrowUpRight,
   Sparkles,
 } from "lucide-react";
-
-const LINKS = {
-  shop: [
-    { label: "New Arrivals", href: "#" },
-    { label: "Best Sellers", href: "#" },
-    { label: "Sale", href: "#", badge: "Hot" },
-    { label: "Collections", href: "#" },
-    { label: "Gift Cards", href: "#" },
-  ],
-  support: [
-    { label: "Help Center", href: "#" },
-    { label: "Track Order", href: "#" },
-    { label: "Returns & Refunds", href: "#" },
-    { label: "Shipping Info", href: "#" },
-    { label: "Size Guide", href: "#" },
-  ],
-  company: [
-    { label: "About Us", href: "#" },
-    { label: "Careers", href: "#", badge: "Hiring" },
-    { label: "Press", href: "#" },
-    { label: "Sustainability", href: "#" },
-    { label: "Affiliates", href: "#" },
-  ],
-};
 
 const SOCIALS = [
   { icon: <Github className="h-4 w-4" />, href: "#", label: "GitHub" },
@@ -52,19 +29,6 @@ const CONTACT = [
   { icon: <Phone className="h-4 w-4" />, text: "+1 (800) 123-4567" },
   { icon: <MapPin className="h-4 w-4" />, text: "San Francisco, CA 94105" },
 ];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-};
 
 export function Footer() {
   return (
@@ -90,7 +54,7 @@ export function Footer() {
       {/* Main Footer */}
       <motion.div
         className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8"
-        variants={containerVariants}
+        variants={FootercontainerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
@@ -98,7 +62,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
           {/* Brand Column */}
           <motion.div
-            variants={itemVariants}
+            variants={FooteritemVariants}
             className="lg:col-span-2 space-y-5"
           >
             {/* Logo */}
@@ -152,7 +116,7 @@ export function Footer() {
           ).map(({ title, links }) => (
             <motion.div
               key={title}
-              variants={itemVariants}
+              variants={FooteritemVariants}
               className="space-y-5"
             >
               <h3 className="text-xs font-semibold uppercase tracking-widest text-default-400">

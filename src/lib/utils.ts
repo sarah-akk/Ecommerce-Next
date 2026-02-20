@@ -1,5 +1,6 @@
 import { Product } from "@/types/types";
 
+
 export function parseSortKey(key: string) {
   if (key === "default") return { sortBy: undefined, order: undefined };
   const [sortBy, order] = key.split("-");
@@ -48,3 +49,29 @@ export function formatCategoryLabel(slug: string) {
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
 }
+
+
+export const LINKS = {
+  shop: [
+    { label: "New Arrivals", href: "#" },
+    { label: "Best Sellers", href: "#" },
+    { label: "Sale", href: "#", badge: "Hot" },
+    { label: "Collections", href: "#" },
+    { label: "Gift Cards", href: "#" },
+  ],
+  support: [
+    { label: "Help Center", href: "#" },
+    { label: "Track Order", href: "#" },
+    { label: "Returns & Refunds", href: "#" },
+    { label: "Shipping Info", href: "#" },
+    { label: "Size Guide", href: "#" },
+  ],
+  company: [
+    { label: "About Us", href: "#" },
+    { label: "Careers", href: "#", badge: "Hiring" },
+    { label: "Press", href: "#" },
+    { label: "Sustainability", href: "#" },
+    { label: "Affiliates", href: "#" },
+  ],
+};
+
