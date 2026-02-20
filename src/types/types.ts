@@ -156,3 +156,19 @@ export interface LogoProps {
   size?: number; 
   onClick?: () => void;
 }
+
+
+export interface CategorySidebarProps {
+  selected: string;
+  onSelect: (category: string) => void;
+  productCounts?: Record<string, number>;
+}
+
+export interface CategoryItemProps {
+  icon: React.ReactNode;
+  label: string;
+  isSelected: boolean;
+  collapsed: boolean;
+  onPress: () => void;
+  count?: number;
+}

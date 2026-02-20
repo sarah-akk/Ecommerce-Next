@@ -50,7 +50,7 @@ export function ProductCard({ product, onPress }: ProductCardProps) {
       shadow="md"
       isPressable
       onPress={onPress}
-      className="group min-h-[420px] w-full transition-shadow hover:shadow-lg"
+      className="group lg:min-h-[350px] w-full transition-shadow hover:shadow-lg"
     >
       <CardBody className="relative flex-shrink-0 overflow-hidden p-0">
         <div className="relative">
@@ -88,7 +88,7 @@ export function ProductCard({ product, onPress }: ProductCardProps) {
         <h3 className="line-clamp-1 text-sm font-semibold text-foreground">
           {product.title}
         </h3>
-        <div className="flex w-full items-center justify-between">
+        <div className="flex w-full max-md:flex-col max-md:items-center justify-between">
           <div className="flex items-baseline gap-1.5">
             <span className="text-lg font-bold text-secondary">
               {formatPrice(discountedPrice)}

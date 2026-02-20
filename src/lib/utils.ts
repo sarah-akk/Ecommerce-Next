@@ -40,3 +40,11 @@ export function formatDiscountedPrice(product: Product): number {
 
   return Math.round(discounted * 100) / 100;
 }
+
+
+export function formatCategoryLabel(slug: string) {
+  return slug
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
