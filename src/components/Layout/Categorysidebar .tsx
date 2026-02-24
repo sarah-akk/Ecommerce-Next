@@ -16,7 +16,7 @@ import {
 import { useCategories } from "@/hooks/useCategories";
 import { formatCategoryLabel } from "@/lib/utils";
 import { CategorySidebarProps } from "@/types/types";
-import { CategoryItem } from "./CategoryItem";
+import { CategoryItem } from "../UI/CategoryItem";
 
 // Map category slugs to icons
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
@@ -142,7 +142,3 @@ export function CategorySidebar({
     </motion.aside>
   );
 }
-
-
-
-

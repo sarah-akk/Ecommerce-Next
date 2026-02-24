@@ -15,7 +15,7 @@ import { ProductCard } from "./Cards/ProductCard";
 import { ProductDetailModal } from "./Modals/ProductDetailModal";
 import { useProductNavigation } from "@/hooks/useProductNavigation";
 import { Logo } from "./UI/Logo";
-import { CategorySidebar } from "./UI/Categorysidebar ";
+import { CategorySidebar } from "./Layout/Categorysidebar ";
 import { CategoryFilter } from "./Filters/CategoryFilter";
 
 const LIMIT = 12;
